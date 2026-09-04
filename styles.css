@@ -391,6 +391,15 @@ reimbursement-check, gold-coast-map { display: contents; }
 }
 @keyframes intro-lift { to { opacity: 0; visibility: hidden; } }
 
+/* Same beats, no rotation or scaling: used when the visitor asked for
+   reduced motion. */
+@keyframes intro-fade {
+  0%   { opacity: 0; }
+  28%  { opacity: 1; }
+  62%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 /* A repeat view in the same tab goes straight to the page. display:none is
    used rather than an animation so it also survives the animation:none
    override further down, which would otherwise freeze the veil over the site. */
@@ -424,8 +433,14 @@ html.intro-done .intro { display: none; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
-  .intro { display: none; }
   html { scroll-behavior: auto; }
+
+  /* Reduce, not remove: the veil still plays, but the mark only fades —
+     spinning and scaling are what trigger vestibular discomfort, an opacity
+     change is not. These need !important to outrank the animation:none above;
+     the class selector wins the specificity tie against its * selector. */
+  .intro { animation: intro-lift .35s ease .55s forwards !important; }
+  .intro__mark { animation: intro-fade .9s ease forwards !important; }
 }
 
 /* Visible keyboard focus on interactive elements.
