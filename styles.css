@@ -367,6 +367,35 @@ reimbursement-check, gold-coast-map { display: contents; }
 /* ----------------------------------------------------------
    8. Motion & accessibility
    ---------------------------------------------------------- */
+/* ---------- intro veil ----------
+   First view of a session: the mark sits in white on a black screen, spins
+   away, and the screen lifts to uncover the page. Driven entirely by CSS, so
+   the veil still lifts if the module script never loads; the inline script in
+   each page's <head> only decides whether it plays at all. */
+.intro {
+  position: fixed; inset: 0; z-index: 200;
+  display: grid; place-items: center;
+  background: var(--ink);
+  animation: intro-lift .4s ease .7s forwards;
+}
+.intro__mark {
+  width: clamp(80px, 13vw, 128px); height: auto;
+  filter: invert(1); /* the mark ships black; flip it for the dark veil */
+  animation: intro-spin 1.1s cubic-bezier(.7, 0, .3, 1) forwards;
+}
+@keyframes intro-spin {
+  0%   { opacity: 0; transform: rotate(-120deg) scale(.7); }
+  24%  { opacity: 1; transform: rotate(0deg) scale(1); }
+  45%  { opacity: 1; transform: rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: rotate(560deg) scale(.12); }
+}
+@keyframes intro-lift { to { opacity: 0; visibility: hidden; } }
+
+/* A repeat view in the same tab goes straight to the page. display:none is
+   used rather than an animation so it also survives the animation:none
+   override further down, which would otherwise freeze the veil over the site. */
+html.intro-done .intro { display: none; }
+
 /* ---------- reveal animation ---------- */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in { opacity: 1; transform: none; }
@@ -395,6 +424,7 @@ reimbursement-check, gold-coast-map { display: contents; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
+  .intro { display: none; }
   html { scroll-behavior: auto; }
 }
 

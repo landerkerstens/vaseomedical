@@ -22,10 +22,27 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- The intro veil plays once per browser session. Deciding that here, before
+       the first paint, keeps a repeat view from flashing the mark again. -->
+  <script>
+    try {
+      if (sessionStorage.getItem("vaseo-intro")) document.documentElement.classList.add("intro-done");
+      else sessionStorage.setItem("vaseo-intro", "1");
+    } catch (e) { /* storage blocked (private mode): just play it */ }
+  </script>
 </head>
 <body>
 
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== INTRO VEIL ===== -->
+  <!-- Written here rather than in a component so it paints with the first
+       frame; behaviour and the once-per-session guard live in styles.css
+       and the inline script above. -->
+  <div class="intro" aria-hidden="true">
+    <img class="intro__mark" src="favicon.svg" alt="" />
+  </div>
 
   <!-- ===== NAV (component) ===== -->
   <site-header></site-header>
