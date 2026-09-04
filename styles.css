@@ -77,7 +77,7 @@ img, svg { display: block; max-width: 100%; }
 site-header, site-footer, site-marquee,
 portfolio-grid, clinical-list, partner-list,
 contact-form, product-card, news-list,
-reimbursement-check { display: contents; }
+reimbursement-check, gold-coast-map { display: contents; }
 
 /* ----------------------------------------------------------
    4. Layout helpers
@@ -312,6 +312,24 @@ reimbursement-check { display: contents; }
 .contact__details span { display: block; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; color: var(--grey); font-weight: 600; margin-bottom: .2rem; }
 .contact__details a, .contact__details p { font-size: 1.05rem; color: var(--ink); }
 .contact__details a:hover { color: var(--grey); }
+
+/* ---------- Australia locator map (gold-coast-map) ---------- */
+.aumap { margin-top: 2.4rem; max-width: 520px; }
+.aumap__svg { width: 100%; height: auto; overflow: visible; }
+.aumap__land { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; stroke-opacity: .78; }
+.aumap__leader { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-opacity: .45; stroke-dasharray: 4 4; }
+.aumap__label { font-family: var(--display); font-size: 24px; font-weight: 600; fill: var(--ink); letter-spacing: -0.01em; }
+.aumap__sub { font-family: var(--body); font-size: 13px; font-weight: 500; fill: var(--grey); letter-spacing: .12em; text-transform: uppercase; }
+.aumap__disc { fill: var(--paper); stroke: var(--ink); stroke-width: 1.6; }
+.aumap__mark { fill: var(--ink); overflow: visible; }
+.aumap__pulse { fill: none; stroke: var(--ink); stroke-width: 1.4; transform-origin: 440.8px 216.2px; animation: aumap-pulse 3s ease-out infinite; }
+.aumap__caption { margin-top: 1rem; font-size: .92rem; color: var(--ink-soft); max-width: 34ch; }
+
+@keyframes aumap-pulse {
+  0%   { transform: scale(.7); opacity: .55; }
+  70%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
 
 .contact__formwrap { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: clamp(1.5rem, 3vw, 2.4rem); }
 .field { margin-bottom: 1.1rem; }

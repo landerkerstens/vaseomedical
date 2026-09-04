@@ -17,6 +17,7 @@ import "./components/portfolio-grid.js";
 import "./components/clinical-list.js";
 import "./components/partner-list.js";
 import "./components/contact-form.js";
+import "./components/gold-coast-map.js";
 import "./components/reimbursement-check.js";
 import "./components/news-list.js";
 import "./components/site-footer.js";
