@@ -376,12 +376,12 @@ reimbursement-check, gold-coast-map { display: contents; }
   position: fixed; inset: 0; z-index: 200;
   display: grid; place-items: center;
   background: var(--ink);
-  animation: intro-lift .4s ease .7s forwards;
+  animation: intro-lift .52s ease .91s forwards;
 }
 .intro__mark {
   width: clamp(80px, 13vw, 128px); height: auto;
   filter: invert(1); /* the mark ships black; flip it for the dark veil */
-  animation: intro-spin 1.1s cubic-bezier(.7, 0, .3, 1) forwards;
+  animation: intro-spin 1.43s cubic-bezier(.7, 0, .3, 1) forwards;
 }
 @keyframes intro-spin {
   0%   { opacity: 0; transform: rotate(-120deg) scale(.7); }
@@ -439,8 +439,8 @@ html.intro-done .intro { display: none; }
      spinning and scaling are what trigger vestibular discomfort, an opacity
      change is not. These need !important to outrank the animation:none above;
      the class selector wins the specificity tie against its * selector. */
-  .intro { animation: intro-lift .35s ease .55s forwards !important; }
-  .intro__mark { animation: intro-fade .9s ease forwards !important; }
+  .intro { animation: intro-lift .46s ease .71s forwards !important; }
+  .intro__mark { animation: intro-fade 1.17s ease forwards !important; }
 }
 
 /* Visible keyboard focus on interactive elements.
