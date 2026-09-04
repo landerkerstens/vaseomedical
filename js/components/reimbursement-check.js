@@ -3,12 +3,14 @@
    ---------------------------------------------------------
    Renders a button that opens a modal with a short form so
    clinicians/companies can check their chances of getting a
-   reimbursement application approved. Front-end only: on a
-   valid submission it shows a confirmation message. Wire
-   submit() to an email service or backend to make it live.
+   reimbursement application approved. There is no backend yet,
+   so a valid submission is handed to the visitor's own mail
+   client via mailto: rather than being dropped — the form
+   promises a reply, so it has to actually reach someone.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js";
+import { Component, define, mailtoLink } from "../lib/component.js";
+import { brand } from "../site-content.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -114,9 +116,22 @@ class ReimbursementCheck extends Component {
         return;
       }
 
-      // Placeholder success — connect this to your email service or backend.
+      window.location.href = mailtoLink(
+        brand.email,
+        `Reimbursement eligibility check — ${company}`,
+        [
+          ["Company", company],
+          ["Product", product],
+          ["CE / MDR certified", certified],
+          ["Number of patients", patients],
+          ["Number of studies", studies],
+          ["Email", email],
+        ]
+      );
+
       status.textContent =
-        "Thank you. Our regulatory department will contact you shortly.";
+        "Thank you. Your email client is opening — send the message and our " +
+        "regulatory department will be in touch.";
       status.className = "form__status ok";
       form.reset();
     });

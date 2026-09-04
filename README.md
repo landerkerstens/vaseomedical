@@ -1,8 +1,8 @@
-# Prion Medical Australia — website
+# Vaseo Medical — website
 
-A static marketing site, refactored into a small component architecture.
-No build step and no framework: it uses native Web Components and ES modules,
-so it deploys to any static host as-is.
+A static marketing site for Vaseo Medical Pty Ltd, the Australian arm of
+Prion Medical. No build step and no framework: it uses native Web Components
+and ES modules, so it deploys to any static host as-is.
 
 ## Project structure
 
@@ -11,22 +11,25 @@ so it deploys to any static host as-is.
 ├── index.html        Page shell + unique prose (hero, about, compliance, contact copy)
 ├── news.html         News page shell (header + news list + footer)
 ├── styles.css        Design tokens + all styling
-├── logo.svg          Brand mark (now displayed 25% larger)
+├── logo.svg          Brand mark + wordmark
+├── favicon.svg       Browser-tab icon (the mark on its own)
+├── og-image.png      1200x630 social preview (LinkedIn, X, Slack)
 └── js/
     ├── main.js              Entry point: registers components, starts behaviours
     ├── site-content.js      Single source of truth for all editable copy
     ├── lib/
-    │   └── component.js      Base class shared by every component
+    │   └── component.js      Base class + href helpers shared by every component
     ├── components/
-    │   ├── site-header.js    <site-header>   nav + mobile menu
-    │   ├── site-marquee.js   <site-marquee>  scrolling keyword band
-    │   ├── product-card.js   <product-card>  one device card
-    │   ├── portfolio-grid.js <portfolio-grid> composes the product cards
-    │   ├── clinical-list.js  <clinical-list> clinical-area rows
-    │   ├── partner-list.js   <partner-list>  "why partner" bullet list
-    │   ├── contact-form.js   <contact-form>  enquiry form + validation
-    │   ├── news-list.js      <news-list>     dated news entries
-    │   └── site-footer.js    <site-footer>   footer + auto year
+    │   ├── site-header.js         <site-header>        nav + mobile menu
+    │   ├── site-marquee.js        <site-marquee>       scrolling keyword band
+    │   ├── product-card.js        <product-card>       one device card
+    │   ├── portfolio-grid.js      <portfolio-grid>     composes the product cards
+    │   ├── clinical-list.js       <clinical-list>      clinical-area rows
+    │   ├── partner-list.js        <partner-list>       "why partner" bullet list
+    │   ├── contact-form.js        <contact-form>       enquiry form + validation
+    │   ├── reimbursement-check.js <reimbursement-check> eligibility modal + form
+    │   ├── news-list.js           <news-list>          dated news + optional LinkedIn embed
+    │   └── site-footer.js         <site-footer>        footer + auto year
     └── behaviours/
         └── scroll-reveal.js  fade-and-rise reveal on scroll
 ```
@@ -35,9 +38,9 @@ so it deploys to any static host as-is.
 
 Most text changes happen in **one place**: `js/site-content.js`. Adding a
 product is a single entry in the `products` array; the card renders itself.
-Menu items, marquee words, clinical areas, partner points and footer links
-work the same way. The longer prose blocks (hero, about, regulatory, contact)
-live directly in `index.html`.
+Menu items, marquee words, clinical areas, partner points, news entries and
+footer links work the same way. The longer prose blocks (hero, about,
+regulatory, contact) live directly in `index.html`.
 
 ## Running it
 
@@ -54,15 +57,28 @@ python3 -m http.server 8000
 For production, upload the whole folder to any static host (Netlify, Vercel,
 Cloudflare Pages, GitHub Pages, or a standard web server).
 
+## Still to do
+
+- **Both forms are front-end only.** `contact-form.js` and
+  `reimbursement-check.js` validate input and then show a confirmation
+  without sending anything. Connect their `submit` handlers to an email
+  service or backend before launch — the reimbursement form in particular
+  promises that "our regulatory department will contact you shortly".
+- **Phone number and office address** are commented out in the contact
+  section of `index.html`; restore those rows once confirmed.
+- **ARTG sponsor details** are commented out in the regulatory section of
+  `index.html` for the same reason.
+- **The LinkedIn embed on the news page is off.** Set `linkedinEmbedUrl` in
+  `js/site-content.js` to a full embed URL including the post id
+  (`.../embed/feed/update/urn:li:share:...`) and it appears above the news
+  list. An incomplete URL is ignored rather than rendered as a dead iframe.
+- **The canonical and Open Graph URLs** in both HTML files point at
+  `https://vaseomedical.com`. Update them if the site lands on another domain.
+
 ## Notes
 
-- The logo is displayed 25% larger than before (header 30 → 37.5px,
-  footer 34 → 42.5px). The SVG inherits colour, so it stays crisp at any size.
-- The contact form is front-end only. Connect `submit()` in
-  `js/components/contact-form.js` to your email service or backend.
-- Fill in the placeholders marked `[ ... ]` in `index.html`
-  (phone, office address, ARTG details).
-```
-# website-prion-medicalAUS
-# website-prion-medicalAUS
-# prionmedicalaustralia
+- The logo inherits nothing and is drawn in black; the footer flips it to
+  white with `filter: invert(1)`. It is a real vector, so it stays crisp at
+  any size.
+- `logo.svg`, `favicon.svg` and `og-image.png` were generated from
+  `VASEOMEDICALLOGO blackwhite.ai`.

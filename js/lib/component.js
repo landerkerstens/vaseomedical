@@ -53,3 +53,27 @@ export function resolveHref(href) {
   }
   return href;
 }
+
+/**
+ * Where the logo should point. Every page carries the header's
+ * own #top anchor, so resolveHref cannot tell the home page from
+ * the others: on news.html "#top" would just scroll to the top of
+ * that page instead of going home. Decide on the URL instead.
+ */
+export function homeHref() {
+  const path = window.location.pathname;
+  const onHome = path.endsWith("/") || path.endsWith("/index.html");
+  return onHome ? "#top" : "index.html";
+}
+
+/**
+ * Build a mailto: URL from a subject and a list of [label, value]
+ * pairs. Neither form has a backend yet, so a valid submission hands
+ * the enquiry to the visitor's own mail client instead of dropping it.
+ * Replace the callers with a fetch() to a real endpoint when there is
+ * one; the validation around them does not need to change.
+ */
+export function mailtoLink(to, subject, fields) {
+  const body = fields.map(([label, value]) => `${label}: ${value}`).join("\n");
+  return `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}

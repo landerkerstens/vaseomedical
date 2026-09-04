@@ -32,7 +32,7 @@ class SiteFooter extends Component {
           <div class="footer__cols">${columns}</div>
         </div>
         <div class="footer__bar">
-          <p>&copy; ${year} ${brand.name}. All rights reserved.</p>
+          <p>&copy; ${year} ${brand.legalName}. All rights reserved.</p>
           <p class="footer__legal">
             Devices supplied subject to TGA / ARTG registration.
             For healthcare professionals.

@@ -6,7 +6,7 @@
    toggle (open / close, ARIA state, close-on-link-click).
    ========================================================= */
 
-import { Component, define, resolveHref } from "../lib/component.js";
+import { Component, define, homeHref, resolveHref } from "../lib/component.js";
 import { brand, navLinks } from "../site-content.js";
 
 class SiteHeader extends Component {
@@ -20,9 +20,9 @@ class SiteHeader extends Component {
     return `
       <header class="nav" id="top">
         <div class="nav__inner">
-          <a href="#top" class="brand" aria-label="${brand.name} home">
+          <a href="${homeHref()}" class="brand" aria-label="${brand.name} home">
             <img class="brand__logo" src="${brand.logo}" alt="${brand.name}"
-                 width="472" height="125" />
+                 width="392" height="123" />
           </a>
 
           <nav class="nav__links" aria-label="Primary">

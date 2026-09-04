@@ -7,8 +7,10 @@
    ========================================================= */
 
 export const brand = {
-  name: "Prion Medical Australia",
+  name: "Vaseo Medical",
+  legalName: "Vaseo Medical Pty Ltd",
   logo: "logo.svg",
+  email: "info@vaseomedical.com",
   tagline: "Specialist distributor of endoscopy and ablation technologies.",
 };
 
@@ -37,7 +39,7 @@ export const products = [
     name: "RFA Needles",
     category: "Radiofrequency ablation",
     description:
-      "Radiofrequency ablation electrodes for image-guided, non-surgical treatment of benign thyroid nodules and uterine fibroids \u2014 a minimally invasive alternative to surgery in suitable patients.",
+      "Radiofrequency ablation electrodes for image-guided, non-surgical treatment of benign thyroid nodules and uterine fibroids — a minimally invasive alternative to surgery in suitable patients.",
     tags: ["RFA", "Thyroid", "Fibroid"],
   },
   {
@@ -53,7 +55,7 @@ export const products = [
     name: "Coming soon",
     category: "In development",
     description:
-      "A next-generation device developed in-house is on the way. We will share more as it approaches clinical introduction \u2014 register your interest to be among the first to hear.",
+      "A next-generation device developed in-house is on the way. We will share more as it approaches clinical introduction — register your interest to be among the first to hear.",
     tags: ["In development", "Innovation"],
   },
 ];
@@ -73,7 +75,7 @@ export const clinicalAreas = [
   {
     marker: "C",
     title: "Therapeutic endoscopy",
-    body: "A focused range of devices for the GI tract, supported by hands-on clinical guidance \u2014 with a next-generation, in-house developed technology in the pipeline.",
+    body: "A focused range of devices for the GI tract, supported by hands-on clinical guidance — with a next-generation, in-house developed technology in the pipeline.",
   },
 ];
 
@@ -97,19 +99,23 @@ export const partnerPoints = [
   },
 ];
 
-/* LinkedIn embed shown on news.html.
-   To show a different post: open the post on LinkedIn, click the "..."
-   menu, choose "Embed this post", and copy the src URL from the iframe
-   (it looks like the example below). Paste only that URL here. */
-export const linkedinEmbedUrl =
-  "https://www.linkedin.com/embed/feed/update/";
+/* Optional LinkedIn embed shown above the news list on news.html.
+   Leave it empty to hide the embed entirely.
+
+   To show a post: open it on LinkedIn, click the "..." menu, choose
+   "Embed this post", and copy the src URL out of the iframe. It must
+   be the full URL including the post id, e.g.
+     https://www.linkedin.com/embed/feed/update/urn:li:share:7123456789
+   A URL without that trailing urn: part is a dead link (LinkedIn
+   returns 404) and the embed is skipped. */
+export const linkedinEmbedUrl = "";
 
 /* News / announcements, newest first. Shown on news.html. */
 export const newsItems = [
   {
     date: "2026-05-20",
     label: "Company",
-    title: "Prion Medical Australia is now operating.",
+    title: "Vaseo Medical is now operating in Australia.",
     body: "Our Australian operation is live, extending the focused European model of clinician-led support to hospitals and specialists across the country. We are introducing our therapeutic endoscopy and ablation portfolio to gastroenterology, surgical and interventional teams.",
   },
   {

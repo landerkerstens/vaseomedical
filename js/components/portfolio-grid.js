@@ -16,7 +16,7 @@ class PortfolioGrid extends Component {
       <div class="cards"></div>
       <p class="portfolio__note">
         Trademarks are the property of their respective manufacturers.
-        Prion Medical Australia acts as an authorised distributor.
+        Vaseo Medical Pty Ltd acts as an authorised distributor.
       </p>
     `;
   }

@@ -2,12 +2,14 @@
    <contact-form> — enquiry form with client-side validation
    ---------------------------------------------------------
    Renders the form markup and encapsulates its validation.
-   The form is front-end only: on a valid submission it shows
-   a placeholder confirmation. Wire submit() to an email
-   service or backend endpoint to make it live.
+   There is no backend yet, so a valid submission is handed to
+   the visitor's own mail client via mailto: rather than being
+   dropped. Swap that call for a fetch() to a real endpoint
+   when one exists.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js";
+import { Component, define, mailtoLink } from "../lib/component.js";
+import { brand } from "../site-content.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -56,9 +58,16 @@ class ContactForm extends Component {
         return;
       }
 
-      // Placeholder success — connect this to your email service or backend.
+      const org = form.elements.org.value.trim();
+      window.location.href = mailtoLink(brand.email, `Website enquiry from ${name}`, [
+        ["Name", name],
+        ["Email", email],
+        ["Organisation", org || "—"],
+        ["Message", message],
+      ]);
+
       status.textContent =
-        "Thank you. This demo form is not yet connected to a backend.";
+        `Thank you. Your email client is opening so you can send this to ${brand.email}.`;
       status.className = "form__status ok";
       form.reset();
     });
