@@ -1,12 +1,21 @@
 /* =========================================================
-   <reimbursement-check> — eligibility enquiry
+   <reimbursement-check> — "explore the possibilities" enquiry
    ---------------------------------------------------------
-   Renders a button that opens a modal with a short form so
-   clinicians/companies can check their chances of getting a
-   reimbursement application approved. There is no backend yet,
-   so a valid submission is handed to the visitor's own mail
-   client via mailto: rather than being dropped — the form
-   promises a reply, so it has to actually reach someone.
+   Renders a button that opens a modal with a short form. The
+   people who open it are clinicians, not manufacturers, so it
+   asks the three things we actually need in order to answer:
+   where they are, how to reach them, and what they want to
+   treat. Our team comes back on regulatory status, funding and
+   what a first case involves.
+
+   There is no backend yet, so a valid submission is handed to
+   the visitor's own mail client via mailto: rather than being
+   dropped — the form promises a reply, so it has to actually
+   reach someone. The sender's name comes with their email, which
+   is why the form does not ask for it a second time.
+
+   The tag, file and CSS class names still read "reimbursement"
+   from an earlier version of this block; they are internal only.
    ========================================================= */
 
 import { Component, define, mailtoLink } from "../lib/component.js";
@@ -14,51 +23,57 @@ import { brand } from "../site-content.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/* Kept in step with the indications on the home page and the
+   clinical applications on the product page. "Something else"
+   stays last so the list never turns anyone away. */
+const INDICATIONS = [
+  "Benign thyroid nodules",
+  "Uterine fibroids",
+  "Liver lesions",
+  "Pancreatic lesions",
+  "Osteoid osteoma",
+  "Something else / not yet decided",
+];
+
 class ReimbursementCheck extends Component {
   render() {
+    const options = INDICATIONS.map(
+      (indication) => `<option value="${indication}">${indication}</option>`
+    ).join("");
+
     return `
       <button type="button" class="btn btn--solid reimbursement__trigger">
-        Check reimbursement possibilities
+        Explore the possibilities with us
       </button>
 
       <div class="reimbursement__overlay" hidden>
         <div class="reimbursement__dialog" role="dialog" aria-modal="true" aria-labelledby="reimbursement-title">
           <button type="button" class="reimbursement__close" aria-label="Close">&times;</button>
-          <p class="eyebrow">Reimbursement</p>
-          <h3 id="reimbursement-title">Check your reimbursement possibilities</h3>
-          <p class="reimbursement__intro">Tell us a little about your product and we will assess the chances of approval for your reimbursement application.</p>
+          <p class="eyebrow">Enquiry</p>
+          <h3 id="reimbursement-title">Explore the possibilities with our team</h3>
+          <p class="reimbursement__intro">Tell us where you are and what you would like to treat. We will come back to you on the regulatory status in Australia, the funding routes available and what a first case would involve.</p>
 
           <form class="reimbursement__form" novalidate>
             <div class="field">
-              <label for="rc-company">Company name</label>
-              <input type="text" id="rc-company" name="company" autocomplete="organization" required />
-            </div>
-            <div class="field">
-              <label for="rc-product">Product name</label>
-              <input type="text" id="rc-product" name="product" required />
-            </div>
-            <div class="field">
-              <span class="field__legend">Does the product have CE / MDR certification?</span>
-              <div class="field__choices">
-                <label class="choice"><input type="radio" name="certified" value="yes" required /> Yes</label>
-                <label class="choice"><input type="radio" name="certified" value="no" /> No</label>
-              </div>
-            </div>
-            <div class="field__row">
-              <div class="field">
-                <label for="rc-patients">Number of patients</label>
-                <input type="number" id="rc-patients" name="patients" min="0" required />
-              </div>
-              <div class="field">
-                <label for="rc-studies">Number of studies</label>
-                <input type="number" id="rc-studies" name="studies" min="0" required />
-              </div>
+              <label for="rc-org">Hospital or company</label>
+              <input type="text" id="rc-org" name="org" autocomplete="organization" required />
             </div>
             <div class="field">
               <label for="rc-email">Email address</label>
               <input type="email" id="rc-email" name="email" autocomplete="email" required />
             </div>
-            <button type="submit" class="btn btn--solid btn--full">Submit</button>
+            <div class="field">
+              <label for="rc-indication">Intended indication</label>
+              <select id="rc-indication" name="indication" required>
+                <option value="" selected disabled>Select an indication</option>
+                ${options}
+              </select>
+            </div>
+            <div class="field">
+              <label for="rc-notes">Anything else we should know? <span class="field__optional">Optional</span></label>
+              <textarea id="rc-notes" name="notes" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn--solid btn--full">Send enquiry</button>
             <p class="form__status" role="status" aria-live="polite"></p>
           </form>
         </div>
@@ -97,15 +112,14 @@ class ReimbursementCheck extends Component {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      const company = form.elements.company.value.trim();
-      const product = form.elements.product.value.trim();
-      const certified = form.elements.certified.value;
-      const patients = form.elements.patients.value.trim();
-      const studies = form.elements.studies.value.trim();
+      const org = form.elements.org.value.trim();
       const email = form.elements.email.value.trim();
+      const indication = form.elements.indication.value;
+      const notes = form.elements.notes.value.trim();
 
-      if (!company || !product || !certified || !patients || !studies || !email) {
-        status.textContent = "Please complete every field before submitting.";
+      if (!org || !email || !indication) {
+        status.textContent =
+          "Please give us your hospital or company, your email and the indication.";
         status.className = "form__status err";
         return;
       }
@@ -118,20 +132,18 @@ class ReimbursementCheck extends Component {
 
       window.location.href = mailtoLink(
         brand.email,
-        `Reimbursement eligibility check — ${company}`,
+        `Enquiry — ${org}`,
         [
-          ["Company", company],
-          ["Product", product],
-          ["CE / MDR certified", certified],
-          ["Number of patients", patients],
-          ["Number of studies", studies],
+          ["Hospital / company", org],
           ["Email", email],
+          ["Intended indication", indication],
+          ["Notes", notes || "—"],
         ]
       );
 
       status.textContent =
-        "Thank you. Your email client is opening — send the message and our " +
-        "regulatory department will be in touch.";
+        "Thank you. Your email client is opening — send the message and a " +
+        "specialist will be in touch.";
       status.className = "form__status ok";
       form.reset();
     });

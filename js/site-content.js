@@ -1,9 +1,15 @@
 /* =========================================================
    site-content.js — single source of truth for the website
    ---------------------------------------------------------
-   All editable copy lives here. To change a menu item, add a
-   product, or adjust the footer, edit this file only. The
-   components read from these exports and render the markup.
+   All editable copy lives here. To change a menu item, adjust
+   the system cards, or edit the footer, change this file only.
+   The components read from these exports and render the markup.
+
+   The site represents one system: the Cambridge Interventional
+   CRF radiofrequency ablation platform and its internally-cooled
+   electrodes. One platform, several indications — copy is written
+   on that assumption. If a second line is ever added, the arrays
+   below are the place it enters the site.
    ========================================================= */
 
 export const brand = {
@@ -11,14 +17,14 @@ export const brand = {
   legalName: "Vaseo Medical Pty Ltd",
   logo: "logo.svg",
   email: "info@vaseomedical.com",
-  tagline: "Specialist distributor of endoscopy and ablation technologies.",
+  tagline: "Specialist distributor of image-guided radiofrequency ablation.",
 };
 
 /* Primary navigation links (header + footer share this list). */
 export const navLinks = [
   { label: "About", href: "#about" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Clinical areas", href: "#clinical" },
+  { label: "The system", href: "#system" },
+  { label: "Indications", href: "#clinical" },
   { label: "Why partner", href: "#partner" },
   { label: "Regulatory", href: "#compliance" },
   { label: "News", href: "news.html" },
@@ -27,38 +33,46 @@ export const navLinks = [
 /* Words shown in the scrolling marquee under the hero. */
 export const marqueeWords = [
   "Radiofrequency ablation",
-  "AI-assisted endoscopy",
-  "Thyroid & fibroid",
-  "Minimally invasive",
+  "Thyroid nodules",
+  "Uterine fibroids",
+  "Liver & pancreas",
+  "Osteoid osteoma",
+  "Internally-cooled electrodes",
 ];
 
-/* Product / device families shown in the Portfolio section. */
+/* What we supply, shown as cards in the "The system" section.
+   One technology, split into the three things a unit actually
+   orders: the capital equipment, the sterile electrodes, and the
+   support around them. Adding an entry adds a card; `href` turns
+   the card into a link to a detail page. */
 export const products = [
   {
     index: "01",
-    name: "CRF Ablation System",
-    category: "Radiofrequency ablation · Cambridge Interventional",
+    name: "Internally-cooled RF electrodes",
+    category: "Sterile single-use · 18 gauge",
     description:
-      "The Cambridge Interventional CRF generator, pump and internally-cooled electrodes for image-guided, non-surgical treatment of benign thyroid nodules and uterine fibroids — a minimally invasive alternative to surgery in suitable patients.",
-    tags: ["RFA", "Thyroid", "Fibroid"],
+      "Non-expanding, internally-cooled electrodes with a sharp tip, echogenic steerable shaft and depth marks. Five active tip lengths from 5 to 20 mm, each on a 7 cm or 12 cm shaft, so lesion size and depth decide the configuration.",
+    tags: ["5–20 mm tips", "7 & 12 cm shafts", "Echogenic"],
     href: "crf-ablation-system.html",
-    linkLabel: "System, indications & brochures",
+    linkLabel: "Everything about the system",
   },
   {
     index: "02",
-    name: "AI Endoscopy & Reporting",
-    category: "AI-assisted endoscopy",
+    name: "CRF generator, pump & footswitch",
+    category: "Capital equipment · Cambridge Interventional",
     description:
-      "An AI-assisted endoscopy platform pairing real-time detection support with structured, automated reporting to streamline the procedure and the record that follows it.",
-    tags: ["AI detection", "Reporting", "Workflow"],
+      "A 370 W radiofrequency generator with real-time audiovisual feedback, an automatically synchronised cooling pump and a hands-free footswitch — so the operator stays on the patient and the ultrasound image rather than on the console.",
+    tags: ["370 W", "Auto-synced pump", "Footswitch"],
+    href: "crf-ablation-system.html#system",
+    linkLabel: "How the system works",
   },
   {
     index: "03",
-    name: "Coming soon",
-    category: "In development",
+    name: "Training & case support",
+    category: "Included with supply",
     description:
-      "A next-generation device developed in-house is on the way. We will share more as it approaches clinical introduction — register your interest to be among the first to hear.",
-    tags: ["In development", "Innovation"],
+      "Structured onboarding for clinical and nursing teams, hands-on support for early cases, funding guidance and stock held against your list — the part of a one-system portfolio that a catalogue distributor cannot offer.",
+    tags: ["Onboarding", "In-theatre support", "Reimbursement"],
   },
 ];
 
@@ -92,42 +106,47 @@ export const resources = [
   },
 ];
 
-/* Clinical areas where the technologies are used. */
+/* Indications, shown on the home page as short pointers only.
+   The home page stays an overview: the full clinical prose, the
+   electrode sizes and the manufacturer's heritage all live one
+   click deeper, on crf-ablation-system.html. Keep these to a
+   sentence or two — if a row starts growing, it belongs there
+   instead. */
 export const clinicalAreas = [
   {
     marker: "A",
-    title: "Interventional ablation",
-    body: "Image-guided radiofrequency ablation for benign thyroid nodules and uterine fibroids, offering a non-surgical, minimally invasive alternative for suitable patients.",
+    title: "Benign thyroid nodules",
+    body: "Ultrasound-guided, moving-shot ablation under local anaesthetic — a day-case alternative to hemithyroidectomy that leaves the gland and thyroid function intact.",
   },
   {
     marker: "B",
-    title: "AI-assisted endoscopy",
-    body: "Real-time detection support paired with structured, automated reporting, helping clinicians work more consistently and capture the record as the procedure unfolds.",
+    title: "Uterine fibroids",
+    body: "Fibroids located individually under ultrasound and heated from within: uterus-sparing, and an alternative to hysterectomy or myomectomy in suitable patients.",
   },
   {
     marker: "C",
-    title: "Therapeutic endoscopy",
-    body: "A focused range of devices for the GI tract, supported by hands-on clinical guidance — with a next-generation, in-house developed technology in the pipeline.",
+    title: "Liver, pancreas and bone",
+    body: "The same generator and electrode range reach liver and pancreatic lesions and osteoid osteoma in bone. Ask us where a given application stands in Australia.",
   },
 ];
 
 /* Reasons to partner, shown in the dark "Why partner" section. */
 export const partnerPoints = [
   {
-    title: "Procedural expertise.",
-    body: "Our specialists understand the clinical workflow around every device we supply.",
+    title: "One system, known end to end.",
+    body: "RF ablation is all we supply, so every conversation is with someone who knows the generator, the electrode range and the procedure.",
+  },
+  {
+    title: "Support in the room.",
+    body: "Structured onboarding for clinical and nursing teams and hands-on support for your early moving-shot cases.",
   },
   {
     title: "Reimbursement know-how.",
     body: "Deep experience navigating funding and reimbursement frameworks for novel device indications.",
   },
   {
-    title: "Responsive logistics.",
-    body: "Reliable stock and rapid response so devices are available when the case is scheduled.",
-  },
-  {
-    title: "Training and education.",
-    body: "Structured onboarding and ongoing education for clinical and nursing teams.",
+    title: "Electrodes on the shelf.",
+    body: "The full tip and shaft range held locally, so the configuration you plan for is the one available when the case is scheduled.",
   },
 ];
 
@@ -148,36 +167,37 @@ export const newsItems = [
     date: "2026-05-20",
     label: "Company",
     title: "Vaseo Medical is now operating in Australia.",
-    body: "Our Australian operation is live, extending the focused European model of clinician-led support to hospitals and specialists across the country. We are introducing our therapeutic endoscopy and ablation portfolio to gastroenterology, surgical and interventional teams.",
+    body: "Our Australian operation is live, extending the focused European model of clinician-led support to hospitals and specialists across the country. We are introducing the CRF radiofrequency ablation system to endocrine, gynaecology, interventional radiology and orthopaedic teams from our Gold Coast base.",
   },
   {
     date: "2026-04-08",
-    label: "Portfolio",
-    title: "The CRF ablation system joins our Australian range.",
-    body: "We are adding the Cambridge Interventional CRF radiofrequency ablation system to the portfolio we represent locally, supporting non-surgical treatment of benign thyroid nodules and uterine fibroids. Availability and indications remain subject to Australian regulatory registration.",
+    label: "Product",
+    title: "We represent the Cambridge Interventional CRF system in Australia.",
+    body: "Vaseo Medical is the Australian distributor for the Cambridge Interventional CRF radiofrequency ablation system and its internally-cooled electrode range — one platform for image-guided, minimally invasive ablation, from benign thyroid nodules and uterine fibroids to liver, pancreatic and bone lesions. Availability and permitted indications remain subject to Australian regulatory registration.",
   },
   {
     date: "2026-03-02",
     label: "Education",
-    title: "Hands-on training programme in development.",
-    body: "We are building a structured onboarding and case-support programme for the clinical and nursing teams who will use our portfolio. Express your interest through the contact form and a specialist will be in touch.",
+    title: "Moving-shot training programme in development.",
+    body: "We are building a structured onboarding and case-support programme around the moving-shot technique, for the clinical and nursing teams introducing thyroid or fibroid ablation to their unit. Express your interest through the contact form and a specialist will be in touch.",
   },
 ];
 
 /* Footer link columns. */
 export const footerColumns = [
   {
-    heading: "Explore",
+    heading: "The system",
     links: [
-      { label: "About", href: "#about" },
-      { label: "Portfolio", href: "#portfolio" },
-      { label: "Clinical areas", href: "#clinical" },
       { label: "CRF ablation system", href: "crf-ablation-system.html" },
+      { label: "Electrode range", href: "crf-ablation-system.html#electrodes" },
+      { label: "Indications", href: "#clinical" },
+      { label: "Brochures", href: "crf-ablation-system.html#documentation" },
     ],
   },
   {
     heading: "Company",
     links: [
+      { label: "About", href: "#about" },
       { label: "Why partner", href: "#partner" },
       { label: "Regulatory", href: "#compliance" },
       { label: "News", href: "news.html" },

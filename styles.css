@@ -232,6 +232,7 @@ reimbursement-check, gold-coast-map { display: contents; }
 .card__more span { display: inline-block; transition: transform .25s ease; }
 .card--link:hover .card__more span { transform: translateX(4px); }
 .portfolio__note, .section__note { text-align: center; margin-top: 2.2rem; font-size: .82rem; color: var(--muted); }
+.section__cta { margin-top: clamp(2.5rem, 5vw, 3.5rem); display: flex; justify-content: center; }
 .portfolio__note a { text-decoration: underline; text-underline-offset: 3px; color: var(--ink); font-weight: 500; }
 
 /* ---------- resources ---------- */
@@ -416,13 +417,18 @@ reimbursement-check, gold-coast-map { display: contents; }
 .contact__formwrap { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: clamp(1.5rem, 3vw, 2.4rem); }
 .field { margin-bottom: 1.1rem; }
 .field label { display: block; font-size: .82rem; font-weight: 600; margin-bottom: .4rem; color: var(--ink-soft); }
-.field input, .field textarea {
+.field__optional { font-weight: 400; color: var(--muted); }
+.field input, .field textarea, .field select {
   width: 100%; font-family: var(--body); font-size: 16px; color: var(--ink);
   padding: .8rem .9rem; border: 1.5px solid var(--line); border-radius: var(--radius);
   background: var(--paper); transition: border-color .2s ease, box-shadow .2s ease;
 }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(22,22,22,.10); }
+.field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(22,22,22,.10); }
 .field textarea { resize: vertical; }
+/* The native arrow is kept — it is the clearest affordance that this is a
+   picker, and it stays correct in every platform's own rendering. The extra
+   right padding just keeps the longest option clear of it. */
+.field select { padding-right: 2.2rem; }
 .form__status { margin-top: .9rem; font-size: .9rem; min-height: 1.2em; }
 .form__status.ok { color: var(--ink); font-weight: 600; }
 .form__status.err { color: #111111; font-weight: 600; }

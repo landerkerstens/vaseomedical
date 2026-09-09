@@ -4,11 +4,22 @@ A static marketing site for Vaseo Medical Pty Ltd, the Australian arm of
 Prion Medical. No build step and no framework: it uses native Web Components
 and ES modules, so it deploys to any static host as-is.
 
+The site represents **one system**: the Cambridge Interventional CRF
+radiofrequency ablation platform and its internally-cooled electrodes. One
+platform, several indications — thyroid nodules and uterine fibroids are the
+two the manufacturer's brochures document in full, with liver, pancreatic and
+bone (osteoid osteoma) applications named as the wider reach of the same
+generator and electrode range. Every page is written on that assumption: the
+home page introduces it, `crf-ablation-system.html` covers it in depth. If a
+second line is ever added, the arrays in `js/site-content.js` are where it
+enters the site.
+
 ## Project structure
 
 ```
 .
-├── index.html        Page shell + unique prose (hero, about, compliance, contact copy)
+├── index.html        Page shell + unique prose (hero, about, the system,
+│                     indications, compliance, contact copy)
 ├── news.html         News page shell (header + news list + footer)
 ├── crf-ablation-system.html
 │                     CRF product page: system, indications, electrode
@@ -26,13 +37,15 @@ and ES modules, so it deploys to any static host as-is.
     ├── components/
     │   ├── site-header.js         <site-header>        nav + mobile menu
     │   ├── site-marquee.js        <site-marquee>       scrolling keyword band
-    │   ├── product-card.js        <product-card>       one device card
-    │   ├── portfolio-grid.js      <portfolio-grid>     composes the product cards
-    │   ├── clinical-list.js       <clinical-list>      clinical-area rows
+    │   ├── product-card.js        <product-card>       one supply card
+    │   ├── portfolio-grid.js      <portfolio-grid>     composes the supply cards
+    │   ├── clinical-list.js       <clinical-list>      indication rows
     │   ├── resource-list.js       <resource-list>      downloadable brochure rows
     │   ├── partner-list.js        <partner-list>       "why partner" bullet list
     │   ├── contact-form.js        <contact-form>       enquiry form + validation
-    │   ├── reimbursement-check.js <reimbursement-check> eligibility modal + form
+    │   ├── reimbursement-check.js <reimbursement-check> "explore the possibilities"
+    │   │                                              enquiry modal (clinician-facing;
+    │   │                                              the tag name is historical)
     │   ├── news-list.js           <news-list>          dated news + optional LinkedIn embed
     │   └── site-footer.js         <site-footer>        footer + auto year
     └── behaviours/
@@ -41,19 +54,33 @@ and ES modules, so it deploys to any static host as-is.
 
 ## Editing content
 
-Most text changes happen in **one place**: `js/site-content.js`. Adding a
-product is a single entry in the `products` array; the card renders itself.
-Menu items, marquee words, clinical areas, partner points, news entries and
-footer links work the same way. Brochures are the same pattern with one extra
-step: drop the PDF in `docs/`, then add an entry to `resources` (the `size`
-field is shown to the visitor, so keep it in step with `du -h docs/<file>`);
-they render on the CRF product page. The longer prose blocks (hero, about,
-regulatory, contact) live directly in `index.html`, and the CRF product copy
-in `crf-ablation-system.html`.
+Most text changes happen in **one place**: `js/site-content.js`. The three
+cards in the "What we supply" section (`#system`) are the `products` array —
+today the capital equipment, the electrodes and the support around them.
+Menu items, marquee words, indications (`clinicalAreas` — rows A/B/C), partner
+points, news
+entries and footer links work the same way. Brochures are the same pattern with
+one extra step: drop the PDF in `docs/`, then add an entry to `resources` (the
+`size` field is shown to the visitor, so keep it in step with
+`du -h docs/<file>`); they render on the CRF product page. The longer prose
+blocks (hero, about, regulatory, contact) live directly in `index.html`, and
+the CRF product copy in `crf-ablation-system.html`.
 
-A product gains its own detail page by adding `href` (and optionally
-`linkLabel`) to its entry in `products`: the card turns into a link to that
-page. A product without an `href` stays a plain card.
+A card gains a detail page by adding `href` (and optionally `linkLabel`) to its
+entry in `products`: the card turns into a link to that page. An entry without
+an `href` stays a plain card.
+
+### Where content goes
+
+The home page is an **overview** and nothing more. Everything deeper about the
+product — the four-part system breakdown, the electrode size and part-number
+table, the manufacturer's heritage, the brochures and the indications in full —
+lives one click away on `crf-ablation-system.html`, which card 01 and the
+indications CTA both open at the top.
+
+That split is the rule to keep when editing: if a `clinicalAreas` row grows past
+a sentence or two, or a home section starts explaining the device rather than
+introducing it, the text belongs on the product page instead.
 
 ## Running it
 
@@ -73,10 +100,15 @@ Cloudflare Pages, GitHub Pages, or a standard web server).
 ## Still to do
 
 - **Both forms are front-end only.** `contact-form.js` and
-  `reimbursement-check.js` validate input and then show a confirmation
-  without sending anything. Connect their `submit` handlers to an email
-  service or backend before launch — the reimbursement form in particular
-  promises that "our regulatory department will contact you shortly".
+  `reimbursement-check.js` validate input and then hand the enquiry to the
+  visitor's own mail client. Connect their `submit` handlers to an email
+  service or backend before launch — the enquiry modal in particular promises
+  that a specialist will come back to the sender.
+- **The liver, pancreas and osteoid-osteoma applications have no documentation
+  on the site.** Row C of the indications and the matching row on the product
+  page are written as the wider reach of the platform rather than as documented
+  protocols. Add manufacturer material to `docs/` and `resources` if it exists,
+  or keep the wording as-is.
 - **Phone number and office address** are commented out in the contact
   section of `index.html`; restore those rows once confirmed.
 - **ARTG sponsor details** are commented out in the regulatory section of
@@ -85,8 +117,10 @@ Cloudflare Pages, GitHub Pages, or a standard web server).
   `js/site-content.js` to a full embed URL including the post id
   (`.../embed/feed/update/urn:li:share:...`) and it appears above the news
   list. An incomplete URL is ignored rather than rendered as a dead iframe.
-- **The canonical and Open Graph URLs** in both HTML files point at
+- **The canonical and Open Graph URLs** in all three HTML files point at
   `https://vaseomedical.com`. Update them if the site lands on another domain.
+- **`og-image.png` still carries the old, broader positioning.** Regenerate it
+  around the CRF ablation system before the site is shared on LinkedIn or X.
 
 ## Notes
 
