@@ -10,10 +10,14 @@ and ES modules, so it deploys to any static host as-is.
 .
 ├── index.html        Page shell + unique prose (hero, about, compliance, contact copy)
 ├── news.html         News page shell (header + news list + footer)
+├── crf-ablation-system.html
+│                     CRF product page: system, indications, electrode
+│                     table, heritage and the brochure downloads
 ├── styles.css        Design tokens + all styling
 ├── logo.svg          Brand mark + wordmark
 ├── favicon.svg       Browser-tab icon (the mark on its own)
 ├── og-image.png      1200x630 social preview (LinkedIn, X, Slack)
+├── docs/             Downloadable PDFs served by the CRF product page
 └── js/
     ├── main.js              Entry point: registers components, starts behaviours
     ├── site-content.js      Single source of truth for all editable copy
@@ -25,6 +29,7 @@ and ES modules, so it deploys to any static host as-is.
     │   ├── product-card.js        <product-card>       one device card
     │   ├── portfolio-grid.js      <portfolio-grid>     composes the product cards
     │   ├── clinical-list.js       <clinical-list>      clinical-area rows
+    │   ├── resource-list.js       <resource-list>      downloadable brochure rows
     │   ├── partner-list.js        <partner-list>       "why partner" bullet list
     │   ├── contact-form.js        <contact-form>       enquiry form + validation
     │   ├── reimbursement-check.js <reimbursement-check> eligibility modal + form
@@ -39,8 +44,16 @@ and ES modules, so it deploys to any static host as-is.
 Most text changes happen in **one place**: `js/site-content.js`. Adding a
 product is a single entry in the `products` array; the card renders itself.
 Menu items, marquee words, clinical areas, partner points, news entries and
-footer links work the same way. The longer prose blocks (hero, about,
-regulatory, contact) live directly in `index.html`.
+footer links work the same way. Brochures are the same pattern with one extra
+step: drop the PDF in `docs/`, then add an entry to `resources` (the `size`
+field is shown to the visitor, so keep it in step with `du -h docs/<file>`);
+they render on the CRF product page. The longer prose blocks (hero, about,
+regulatory, contact) live directly in `index.html`, and the CRF product copy
+in `crf-ablation-system.html`.
+
+A product gains its own detail page by adding `href` (and optionally
+`linkLabel`) to its entry in `products`: the card turns into a link to that
+page. A product without an `href` stays a plain card.
 
 ## Running it
 

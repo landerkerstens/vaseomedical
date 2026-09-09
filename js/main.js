@@ -15,6 +15,7 @@ import "./components/site-marquee.js";
 import "./components/product-card.js";
 import "./components/portfolio-grid.js";
 import "./components/clinical-list.js";
+import "./components/resource-list.js";
 import "./components/partner-list.js";
 import "./components/contact-form.js";
 import "./components/gold-coast-map.js";

@@ -36,11 +36,13 @@ export const marqueeWords = [
 export const products = [
   {
     index: "01",
-    name: "RFA Needles",
-    category: "Radiofrequency ablation",
+    name: "CRF Ablation System",
+    category: "Radiofrequency ablation · Cambridge Interventional",
     description:
-      "Radiofrequency ablation electrodes for image-guided, non-surgical treatment of benign thyroid nodules and uterine fibroids — a minimally invasive alternative to surgery in suitable patients.",
+      "The Cambridge Interventional CRF generator, pump and internally-cooled electrodes for image-guided, non-surgical treatment of benign thyroid nodules and uterine fibroids — a minimally invasive alternative to surgery in suitable patients.",
     tags: ["RFA", "Thyroid", "Fibroid"],
+    href: "crf-ablation-system.html",
+    linkLabel: "System, indications & brochures",
   },
   {
     index: "02",
@@ -57,6 +59,36 @@ export const products = [
     description:
       "A next-generation device developed in-house is on the way. We will share more as it approaches clinical introduction — register your interest to be among the first to hear.",
     tags: ["In development", "Innovation"],
+  },
+];
+
+/* Downloadable documents shown on the CRF product page
+   (crf-ablation-system.html), rendered by <resource-list>.
+
+   `file` is a path relative to the site root; drop new PDFs in docs/
+   and add an entry here. `size` is shown next to the link so a visitor
+   knows what they are about to download — update it when a file is
+   replaced (`du -h docs/<file>` gives the number).
+
+   These are manufacturer materials for healthcare professionals:
+   keep the `meta` line pointing at the document code and revision so
+   the version on the site can be traced back to the source. */
+export const resources = [
+  {
+    title: "CRF System — Thyroid Radiofrequency Ablation",
+    summary:
+      "Generator, cooled electrode range and ablation-size reference for moving-shot ablation of thyroid nodules.",
+    meta: "Cambridge Interventional · MK-000010 Rev A",
+    file: "docs/crf-system-thyroid-rfa-brochure.pdf",
+    size: "PDF · 1.5 MB",
+  },
+  {
+    title: "CRF System — Myoma Radiofrequency Ablation",
+    summary:
+      "System overview, procedure steps and a case report for transvaginal RFA of uterine fibroids.",
+    meta: "Cambridge Interventional · MK-000021 Rev A",
+    file: "docs/crf-system-myoma-rfa-brochure.pdf",
+    size: "PDF · 2.4 MB",
   },
 ];
 
@@ -121,8 +153,8 @@ export const newsItems = [
   {
     date: "2026-04-08",
     label: "Portfolio",
-    title: "RFA needles join our Australian range.",
-    body: "We are adding radiofrequency ablation electrodes to the portfolio we represent locally, supporting non-surgical treatment of benign thyroid nodules and uterine fibroids. Availability and indications remain subject to Australian regulatory registration.",
+    title: "The CRF ablation system joins our Australian range.",
+    body: "We are adding the Cambridge Interventional CRF radiofrequency ablation system to the portfolio we represent locally, supporting non-surgical treatment of benign thyroid nodules and uterine fibroids. Availability and indications remain subject to Australian regulatory registration.",
   },
   {
     date: "2026-03-02",
@@ -140,6 +172,7 @@ export const footerColumns = [
       { label: "About", href: "#about" },
       { label: "Portfolio", href: "#portfolio" },
       { label: "Clinical areas", href: "#clinical" },
+      { label: "CRF ablation system", href: "crf-ablation-system.html" },
     ],
   },
   {

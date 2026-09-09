@@ -16,7 +16,8 @@ class PortfolioGrid extends Component {
       <div class="cards"></div>
       <p class="portfolio__note">
         Trademarks are the property of their respective manufacturers.
-        Vaseo Medical Pty Ltd acts as an authorised distributor.
+        Vaseo Medical Pty Ltd is the Australian distributor for the
+        Cambridge Interventional CRF ablation system.
       </p>
     `;
   }

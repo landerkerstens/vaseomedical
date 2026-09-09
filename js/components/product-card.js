@@ -8,12 +8,17 @@
        card.product = { index, name, category, description, tags };
        grid.append(card);
 
+   A product with an `href` renders as a link to its own
+   detail page and gains a "read more" cue; one without stays
+   an inert <article>. Both share the .card styling, so the
+   grid looks the same either way.
+
    Because the element is `display: contents`, the rendered
-   <article class="card"> becomes a direct child of the grid,
-   inheriting the existing card layout and hover styles.
+   card becomes a direct child of the grid, inheriting the
+   existing card layout and hover styles.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js";
+import { Component, define, resolveHref } from "../lib/component.js";
 
 class ProductCard extends Component {
   render() {
@@ -24,14 +29,23 @@ class ProductCard extends Component {
       .map((tag) => `<li>${tag}</li>`)
       .join("");
 
+    const body = `
+      <div class="card__index">${product.index}</div>
+      <h3>${product.name}</h3>
+      <p class="card__cat">${product.category}</p>
+      <p>${product.description}</p>
+      <ul class="card__tags">${tags}</ul>
+    `;
+
+    if (!product.href) {
+      return `<article class="card">${body}</article>`;
+    }
+
     return `
-      <article class="card">
-        <div class="card__index">${product.index}</div>
-        <h3>${product.name}</h3>
-        <p class="card__cat">${product.category}</p>
-        <p>${product.description}</p>
-        <ul class="card__tags">${tags}</ul>
-      </article>
+      <a class="card card--link" href="${resolveHref(product.href)}">
+        ${body}
+        <p class="card__more">${product.linkLabel || "Read more"} <span aria-hidden="true">&rarr;</span></p>
+      </a>
     `;
   }
 }
