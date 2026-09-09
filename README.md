@@ -42,7 +42,8 @@ enters the site.
     │   ├── clinical-list.js       <clinical-list>      indication rows
     │   ├── resource-list.js       <resource-list>      downloadable brochure rows
     │   ├── partner-list.js        <partner-list>       "why partner" bullet list
-    │   ├── contact-form.js        <contact-form>       the site's one enquiry form
+    │   ├── contact-form.js        <contact-form>       black button + enquiry dialog
+    │   │                                              (the site's only form)
     │   ├── news-list.js           <news-list>          dated news + optional LinkedIn embed
     │   └── site-footer.js         <site-footer>        footer + auto year
     └── behaviours/
@@ -69,12 +70,12 @@ an `href` stays a plain card.
 
 ### One form, one inbox
 
-There is exactly one enquiry form on the site: `<contact-form>`, in the contact
-section under the Australia map. Every call to action anywhere else — the
-regulatory section's "Talk to our team" button, the header and hero CTAs, the
-footer — points at `#contact` rather than opening a form of its own. An earlier
-version had a second form in a modal; if a new kind of enquiry comes up, add a
-field to the one form instead of a second one.
+There is exactly one enquiry form on the site: `<contact-form>`. It renders a
+black button under the Australia map and opens the form in a dialog over the
+page. Every call to action anywhere else — the regulatory section's "Talk to our
+team" button, the header and hero CTAs, the footer — points at `#contact`, which
+lands the visitor on that button rather than opening a form of its own. If a new
+kind of enquiry comes up, add a field to the one form instead of a second one.
 
 ### Where content goes
 
@@ -105,8 +106,8 @@ Cloudflare Pages, GitHub Pages, or a standard web server).
 
 ## Still to do
 
-- **The enquiry form is front-end only.** `contact-form.js` validates input and
-  then hands the enquiry to the visitor's own mail client. Connect its `submit`
+- **The enquiry dialog is front-end only.** `contact-form.js` validates input
+  and then hands the enquiry to the visitor's own mail client. Connect its `submit`
   handler to an email service or backend before launch — the form promises that
   a specialist will respond.
 - **The liver, pancreas and osteoid-osteoma applications have no documentation

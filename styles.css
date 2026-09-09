@@ -383,11 +383,31 @@ gold-coast-map { display: contents; }
   100% { transform: scale(1.9); opacity: 0; }
 }
 
-.contact__formwrap {
-  max-width: 680px; margin: clamp(2.5rem, 5vw, 4rem) auto 0;
-  background: var(--card); border: 1px solid var(--line); border-radius: 10px;
-  padding: clamp(1.5rem, 3vw, 2.4rem);
+/* ---------- enquiry dialog (contact-form) ---------- */
+.enquiry__overlay {
+  position: fixed; inset: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem; background: rgba(22, 22, 22, .55);
+  backdrop-filter: blur(3px);
 }
+.enquiry__overlay[hidden] { display: none; }
+.enquiry__dialog {
+  position: relative; width: 100%; max-width: 540px;
+  max-height: 90vh; overflow-y: auto;
+  background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+  padding: clamp(1.6rem, 4vw, 2.6rem); text-align: left;
+  box-shadow: 0 24px 60px rgba(22, 22, 22, .25);
+}
+.enquiry__dialog h3 { font-size: clamp(1.4rem, 3vw, 1.9rem); margin: .3rem 0 .6rem; }
+.enquiry__intro { color: var(--ink-soft); font-size: 1rem; margin-bottom: 1.6rem; }
+.enquiry__close {
+  position: absolute; top: .8rem; right: .8rem;
+  width: 2.2rem; height: 2.2rem; display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; line-height: 1; color: var(--ink-soft);
+  background: transparent; border: none; border-radius: var(--radius); cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+}
+.enquiry__close:hover { background: var(--paper-2); color: var(--ink); }
 .field { margin-bottom: 1.1rem; }
 .field label { display: block; font-size: .82rem; font-weight: 600; margin-bottom: .4rem; color: var(--ink-soft); }
 .field__optional { font-weight: 400; color: var(--muted); }
@@ -560,7 +580,7 @@ button:focus-visible,
   }
   .nav__links.open a::after { display: none; }
   .nav__links.open a:last-child { border-bottom: none; }
-  .nav__links.open .nav__contact-mobile { display: block; font-weight: 600; }
+  .nav__links.open .nav__contact-mobile { display: block; }
 
   /* Larger tap targets for footer links */
   .footer__cols a { padding: .55rem 0; }

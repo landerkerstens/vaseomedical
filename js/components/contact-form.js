@@ -1,11 +1,12 @@
 /* =========================================================
    <contact-form> — the site's single enquiry form
    ---------------------------------------------------------
-   Every kind of enquiry arrives here: evaluating the system,
-   choosing an electrode configuration, asking where an
-   indication stands with the TGA, or booking a case. There is
-   deliberately no second form and no modal anywhere on the
-   site — one form, one inbox.
+   Renders one black button; the form itself opens in a dialog
+   over the page. Every kind of enquiry arrives here: evaluating
+   the system, choosing an electrode configuration, asking where
+   an indication stands with the TGA, or booking a case. There is
+   deliberately no second form anywhere on the site — one form,
+   one inbox.
 
    The indication picker is optional: it gives a clinical
    enquiry somewhere precise to land without turning a general
@@ -41,7 +42,18 @@ class ContactForm extends Component {
     ).join("");
 
     return `
-      <form class="contact__form" novalidate>
+      <button type="button" class="btn btn--solid enquiry__trigger">
+        Send us an enquiry
+      </button>
+
+      <div class="enquiry__overlay" hidden>
+        <div class="enquiry__dialog" role="dialog" aria-modal="true" aria-labelledby="enquiry-title">
+          <button type="button" class="enquiry__close" aria-label="Close">&times;</button>
+          <p class="eyebrow">Contact</p>
+          <h3 id="enquiry-title">Talk to our team</h3>
+          <p class="enquiry__intro">Tell us what you are looking at and a specialist will respond. If your question is about a particular indication, picking it below gets you to the right person faster.</p>
+
+          <form class="contact__form" novalidate>
         <div class="field__row">
           <div class="field">
             <label for="name">Name</label>
@@ -67,15 +79,44 @@ class ContactForm extends Component {
           <label for="message">How can we help?</label>
           <textarea id="message" name="message" rows="4" required></textarea>
         </div>
-        <button type="submit" class="btn btn--solid btn--full">Send enquiry</button>
-        <p class="form__status" role="status" aria-live="polite"></p>
-      </form>
+            <button type="submit" class="btn btn--solid btn--full">Send enquiry</button>
+            <p class="form__status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
     `;
   }
 
   afterRender() {
     const form = this.querySelector("form");
     const status = this.querySelector(".form__status");
+    const trigger = this.querySelector(".enquiry__trigger");
+    const overlay = this.querySelector(".enquiry__overlay");
+    const dialog = this.querySelector(".enquiry__dialog");
+    const closeBtn = this.querySelector(".enquiry__close");
+
+    const open = () => {
+      overlay.hidden = false;
+      document.body.style.overflow = "hidden";
+      dialog.querySelector("input").focus();
+    };
+
+    // Focus goes back to the button that opened the dialog, so a keyboard
+    // user is not dropped at the top of the document on close.
+    const close = () => {
+      overlay.hidden = true;
+      document.body.style.overflow = "";
+      trigger.focus();
+    };
+
+    trigger.addEventListener("click", open);
+    closeBtn.addEventListener("click", close);
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) close();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !overlay.hidden) close();
+    });
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
