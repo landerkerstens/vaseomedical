@@ -1,21 +1,21 @@
 /* =========================================================
    <site-header> — sticky navigation bar
    ---------------------------------------------------------
-   Renders the brand, primary navigation and the contact CTA
-   from the shared content data, and manages the mobile menu
-   toggle (open / close, ARIA state, close-on-link-click).
+   Renders the brand and the primary navigation from the shared
+   content data, and manages the mobile menu toggle (open /
+   close, ARIA state, close-on-link-click). Contact is one of
+   the navLinks entries, so the bar and the menu carry the same
+   options and neither has a button of its own.
    ========================================================= */
 
-import { Component, define, homeHref, resolveHref } from "../lib/component.js?v=202609091659";
-import { brand, navLinks } from "../site-content.js?v=202609091659";
+import { Component, define, homeHref, resolveHref } from "../lib/component.js?v=202609091701";
+import { brand, navLinks } from "../site-content.js?v=202609091701";
 
 class SiteHeader extends Component {
   render() {
     const links = navLinks
       .map((link) => `<a href="${resolveHref(link.href)}">${link.label}</a>`)
       .join("");
-
-    const contactHref = resolveHref("#contact");
 
     return `
       <header class="nav" id="top">
@@ -27,9 +27,7 @@ class SiteHeader extends Component {
 
           <nav class="nav__links" aria-label="Primary">
             ${links}
-            <a href="${contactHref}" class="btn btn--solid nav__cta-mobile">Contact us</a>
           </nav>
-
 
           <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
             <span></span><span></span><span></span>

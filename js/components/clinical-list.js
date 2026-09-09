@@ -4,8 +4,8 @@
    Renders one row per clinical area from the content data.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js?v=202609091659";
-import { clinicalAreas } from "../site-content.js?v=202609091659";
+import { Component, define } from "../lib/component.js?v=202609091701";
+import { clinicalAreas } from "../site-content.js?v=202609091701";
 
 class ClinicalList extends Component {
   render() {

@@ -9,8 +9,8 @@
    still offers a save button.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js?v=202609091659";
-import { resources } from "../site-content.js?v=202609091659";
+import { Component, define } from "../lib/component.js?v=202609091701";
+import { resources } from "../site-content.js?v=202609091701";
 
 class ResourceList extends Component {
   render() {

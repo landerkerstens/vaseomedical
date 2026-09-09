@@ -18,8 +18,8 @@
    when one exists; the validation around it does not change.
    ========================================================= */
 
-import { Component, define, mailtoLink } from "../lib/component.js?v=202609091659";
-import { brand } from "../site-content.js?v=202609091659";
+import { Component, define, mailtoLink } from "../lib/component.js?v=202609091701";
+import { brand } from "../site-content.js?v=202609091701";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
