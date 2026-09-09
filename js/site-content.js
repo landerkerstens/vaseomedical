@@ -28,6 +28,7 @@ export const navLinks = [
   { label: "Why partner", href: "#partner" },
   { label: "Regulatory", href: "#compliance" },
   { label: "News", href: "news.html" },
+  { label: "Contact", href: "#contact" },
 ];
 
 /* Words shown in the scrolling marquee under the hero. */

@@ -561,9 +561,6 @@ button:focus-visible,
 }
 .skip-link:focus { transform: translateY(0); outline: 2px solid var(--paper); outline-offset: 2px; }
 
-/* Mobile contact link lives in the nav list but only appears in the open menu */
-.nav__contact-mobile { display: none; }
-
 /* Hamburger: larger tap target + morph into a clear X when open */
 .nav__toggle { padding: .6rem; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
 .nav__toggle span { transform-origin: center; transition: transform .3s ease, opacity .2s ease; }
@@ -580,7 +577,6 @@ button:focus-visible,
   }
   .nav__links.open a::after { display: none; }
   .nav__links.open a:last-child { border-bottom: none; }
-  .nav__links.open .nav__contact-mobile { display: block; }
 
   /* Larger tap targets for footer links */
   .footer__cols a { padding: .55rem 0; }

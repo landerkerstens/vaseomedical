@@ -124,7 +124,12 @@ Cloudflare Pages, GitHub Pages, or a standard web server).
   (`.../embed/feed/update/urn:li:share:...`) and it appears above the news
   list. An incomplete URL is ignored rather than rendered as a dead iframe.
 - **The canonical and Open Graph URLs** in all three HTML files point at
-  `https://vaseomedical.com`. Update them if the site lands on another domain.
+  `https://vaseomedical.com`, which is not registered yet — purchase is planned
+  for around October 2026. Until then the site is served from
+  `https://landerkerstens.github.io/vaseomedical/` and those URLs resolve to
+  nothing, so social previews and canonical hints are inert. Once the domain is
+  live, add a `CNAME` file with the bare hostname and point DNS at GitHub Pages;
+  no other change is needed, the URLs are already correct for it.
 - **`og-image.png` still carries the old, broader positioning.** Regenerate it
   around the CRF ablation system before the site is shared on LinkedIn or X.
 
