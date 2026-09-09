@@ -5,8 +5,8 @@
    second column of the partner grid.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js";
-import { partnerPoints } from "../site-content.js";
+import { Component, define } from "../lib/component.js?v=202609091654";
+import { partnerPoints } from "../site-content.js?v=202609091654";
 
 class PartnerList extends Component {
   render() {

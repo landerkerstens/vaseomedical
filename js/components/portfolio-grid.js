@@ -8,8 +8,8 @@
    scripts.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js";
-import { products } from "../site-content.js";
+import { Component, define } from "../lib/component.js?v=202609091654";
+import { products } from "../site-content.js?v=202609091654";
 
 class PortfolioGrid extends Component {
   render() {

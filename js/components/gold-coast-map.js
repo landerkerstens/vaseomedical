@@ -20,7 +20,7 @@
      y = (-10.0 - lat) * -12
    ========================================================= */
 
-import { Component, define } from "../lib/component.js";
+import { Component, define } from "../lib/component.js?v=202609091654";
 
 /* Gold Coast — 153.43°E, 28.02°S — through the projection above. */
 const GC_X = 440.8;

@@ -28,6 +28,7 @@ enters the site.
 ├── logo.svg          Brand mark + wordmark
 ├── favicon.svg       Browser-tab icon (the mark on its own)
 ├── og-image.png      1200x630 social preview (LinkedIn, X, Slack)
+├── bump.py           Stamps a new ?v= on every script URL (see Deploying)
 ├── docs/             Downloadable PDFs served by the CRF product page
 └── js/
     ├── main.js              Entry point: registers components, starts behaviours
@@ -103,6 +104,26 @@ python3 -m http.server 8000
 
 For production, upload the whole folder to any static host (Netlify, Vercel,
 Cloudflare Pages, GitHub Pages, or a standard web server).
+
+## Deploying
+
+**After editing anything under `js/`, run `bump.py` before pushing:**
+
+```
+python3 bump.py
+```
+
+There is no build step, so browsers decide for themselves how long to keep
+`js/*.js`. GitHub Pages sends `max-age=600`, but browsers hold ES modules well
+past that — a visitor can sit on old JavaScript after a deploy and see none of
+the change, while the server is serving the new file perfectly. `bump.py`
+appends `?v=<timestamp>` to every script URL (the `<script src>` in each HTML
+page and every relative import inside `js/`), so new code arrives at a new URL
+and a stale copy can never be reused.
+
+CSS is not versioned: `styles.css` is a plain stylesheet, and a hard refresh
+picks it up. If a style change ever proves as sticky as the modules did, the
+same trick works on the `<link rel="stylesheet">`.
 
 ## Still to do
 

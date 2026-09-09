@@ -6,8 +6,8 @@
    toggle (open / close, ARIA state, close-on-link-click).
    ========================================================= */
 
-import { Component, define, homeHref, resolveHref } from "../lib/component.js";
-import { brand, navLinks } from "../site-content.js";
+import { Component, define, homeHref, resolveHref } from "../lib/component.js?v=202609091654";
+import { brand, navLinks } from "../site-content.js?v=202609091654";
 
 class SiteHeader extends Component {
   render() {

@@ -8,8 +8,8 @@
    news.html.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js";
-import { linkedinEmbedUrl, newsItems } from "../site-content.js";
+import { Component, define } from "../lib/component.js?v=202609091654";
+import { linkedinEmbedUrl, newsItems } from "../site-content.js?v=202609091654";
 
 /* LinkedIn's embed URL only resolves with a post id appended;
    the bare .../embed/feed/update/ path returns a 404. */
