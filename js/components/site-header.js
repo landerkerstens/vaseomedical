@@ -27,6 +27,7 @@ class SiteHeader extends Component {
 
           <nav class="nav__links" aria-label="Primary">
             ${links}
+            <a href="${contactHref}" class="btn btn--solid nav__cta-mobile">Contact us</a>
           </nav>
 
           <a href="${contactHref}" class="btn btn--nav">Contact us</a>
