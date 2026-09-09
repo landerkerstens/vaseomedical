@@ -6,8 +6,8 @@
    toggle (open / close, ARIA state, close-on-link-click).
    ========================================================= */
 
-import { Component, define, homeHref, resolveHref } from "../lib/component.js?v=202609091654";
-import { brand, navLinks } from "../site-content.js?v=202609091654";
+import { Component, define, homeHref, resolveHref } from "../lib/component.js?v=202609091659";
+import { brand, navLinks } from "../site-content.js?v=202609091659";
 
 class SiteHeader extends Component {
   render() {
@@ -30,7 +30,6 @@ class SiteHeader extends Component {
             <a href="${contactHref}" class="btn btn--solid nav__cta-mobile">Contact us</a>
           </nav>
 
-          <a href="${contactHref}" class="btn btn--nav">Contact us</a>
 
           <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
             <span></span><span></span><span></span>

@@ -7,8 +7,8 @@
    is all that is needed; the duplication is automatic.
    ========================================================= */
 
-import { Component, define } from "../lib/component.js?v=202609091654";
-import { marqueeWords } from "../site-content.js?v=202609091654";
+import { Component, define } from "../lib/component.js?v=202609091659";
+import { marqueeWords } from "../site-content.js?v=202609091659";
 
 class SiteMarquee extends Component {
   render() {

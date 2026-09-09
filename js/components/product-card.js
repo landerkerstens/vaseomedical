@@ -18,7 +18,7 @@
    existing card layout and hover styles.
    ========================================================= */
 
-import { Component, define, resolveHref } from "../lib/component.js?v=202609091654";
+import { Component, define, resolveHref } from "../lib/component.js?v=202609091659";
 
 class ProductCard extends Component {
   render() {

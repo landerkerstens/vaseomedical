@@ -6,8 +6,8 @@
    year automatically.
    ========================================================= */
 
-import { Component, define, resolveHref } from "../lib/component.js?v=202609091654";
-import { brand, footerColumns } from "../site-content.js?v=202609091654";
+import { Component, define, resolveHref } from "../lib/component.js?v=202609091659";
+import { brand, footerColumns } from "../site-content.js?v=202609091659";
 
 class SiteFooter extends Component {
   render() {

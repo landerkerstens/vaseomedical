@@ -106,8 +106,6 @@ gold-coast-map { display: contents; }
 .btn--ghost { background: transparent; color: var(--ink); }
 .btn--ghost:hover { background: var(--ink); color: var(--paper); transform: translateY(-2px); }
 .btn--full { width: 100%; }
-.btn--nav { padding: 0.6rem 1.2rem; font-size: 0.85rem; background: var(--ink); color: var(--paper); border-color: var(--ink); }
-.btn--nav:hover { background: #333333; border-color: #333333; }
 
 /* ---------- nav ---------- */
 .nav {
@@ -504,7 +502,6 @@ html.intro-done .intro { display: none; }
   .cards { grid-template-columns: 1fr; }
   .crow { grid-template-columns: 50px 1fr; }
   .crow__body { grid-column: 1 / -1; padding-left: 65px; }
-  .btn--nav { display: none; }
 }
 @media (max-width: 520px) {
   .hero__stats { gap: 1.4rem; }
@@ -581,8 +578,8 @@ button:focus-visible,
   .nav__links.open a::after { display: none; }
   .nav__links.open a:last-child { border-bottom: none; }
 
-  /* The black contact CTA, repeated inside the open menu because .btn--nav
-     is hidden at this width. Overrides the plain-link rules above, which
+  /* The black contact CTA. The nav bar itself carries no button, so this is
+     the only one on the site. Overrides the plain-link rules above, which
      would otherwise paint black text on the black button. */
   .nav__links.open .nav__cta-mobile {
     display: inline-flex; width: 100%; margin-top: 1.1rem;
