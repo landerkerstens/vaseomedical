@@ -159,7 +159,9 @@
         <h2>Australian compliance, by design.</h2>
       </div>
       <p class="compliance__text">Medical devices supplied in Australia are regulated by the Therapeutic Goods Administration (TGA). Vaseo Medical Pty Ltd is committed to supplying the CRF ablation system and its electrodes only where they are appropriately included in the Australian Register of Therapeutic Goods (ARTG) for their intended use, and to operating in line with applicable Australian regulatory and quality requirements. Indications differ in how far they are established &mdash; talk to us about where a given application stands before you plan around it.</p>
-      <reimbursement-check></reimbursement-check>
+      <p class="section__cta">
+        <a href="#contact" class="btn btn--solid">Talk to our team</a>
+      </p>
       <!-- TODO: publish the ARTG sponsor details, ARTG entry numbers and quality
            certifications here. Kept out of the markup until the real values are
            available so visitors never see a placeholder.
@@ -174,7 +176,7 @@
       <div class="contact__copy">
         <p class="eyebrow">Contact</p>
         <h2>Talk to our team.</h2>
-        <p>Whether you are evaluating radiofrequency ablation for your unit, choosing an electrode configuration for a particular lesion or arranging a case, we would be glad to help. Reach out and a specialist will respond.</p>
+        <p>Whether you are evaluating radiofrequency ablation for your unit, choosing an electrode configuration for a particular lesion, asking where an indication stands with the TGA or arranging a case &mdash; this is the one place to ask. Send the form and a specialist will respond.</p>
         <div class="contact__details">
           <div><span>Email</span><a href="mailto:info@vaseomedical.com">info@vaseomedical.com</a></div>
           <!-- TODO: restore these two rows once the Australian number and office
@@ -184,14 +186,17 @@
           <div><span>Office</span><p>...</p></div>
           -->
         </div>
-        <!-- outline of Australia with the Vaseo mark on the Gold Coast -->
-        <gold-coast-map></gold-coast-map>
       </div>
 
-      <div class="contact__formwrap">
-        <!-- form + validation handled by the component -->
-        <contact-form></contact-form>
-      </div>
+      <!-- outline of Australia with the Vaseo mark on the Gold Coast -->
+      <gold-coast-map></gold-coast-map>
+    </div>
+
+    <!-- The single enquiry form for the whole site, sitting under the map.
+         Everything that used to open its own modal now arrives here. -->
+    <div class="contact__formwrap">
+      <!-- form + validation handled by the component -->
+      <contact-form></contact-form>
     </div>
   </section>
 

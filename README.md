@@ -42,10 +42,7 @@ enters the site.
     │   ├── clinical-list.js       <clinical-list>      indication rows
     │   ├── resource-list.js       <resource-list>      downloadable brochure rows
     │   ├── partner-list.js        <partner-list>       "why partner" bullet list
-    │   ├── contact-form.js        <contact-form>       enquiry form + validation
-    │   ├── reimbursement-check.js <reimbursement-check> "explore the possibilities"
-    │   │                                              enquiry modal (clinician-facing;
-    │   │                                              the tag name is historical)
+    │   ├── contact-form.js        <contact-form>       the site's one enquiry form
     │   ├── news-list.js           <news-list>          dated news + optional LinkedIn embed
     │   └── site-footer.js         <site-footer>        footer + auto year
     └── behaviours/
@@ -69,6 +66,15 @@ the CRF product copy in `crf-ablation-system.html`.
 A card gains a detail page by adding `href` (and optionally `linkLabel`) to its
 entry in `products`: the card turns into a link to that page. An entry without
 an `href` stays a plain card.
+
+### One form, one inbox
+
+There is exactly one enquiry form on the site: `<contact-form>`, in the contact
+section under the Australia map. Every call to action anywhere else — the
+regulatory section's "Talk to our team" button, the header and hero CTAs, the
+footer — points at `#contact` rather than opening a form of its own. An earlier
+version had a second form in a modal; if a new kind of enquiry comes up, add a
+field to the one form instead of a second one.
 
 ### Where content goes
 
@@ -99,11 +105,10 @@ Cloudflare Pages, GitHub Pages, or a standard web server).
 
 ## Still to do
 
-- **Both forms are front-end only.** `contact-form.js` and
-  `reimbursement-check.js` validate input and then hand the enquiry to the
-  visitor's own mail client. Connect their `submit` handlers to an email
-  service or backend before launch — the enquiry modal in particular promises
-  that a specialist will come back to the sender.
+- **The enquiry form is front-end only.** `contact-form.js` validates input and
+  then hands the enquiry to the visitor's own mail client. Connect its `submit`
+  handler to an email service or backend before launch — the form promises that
+  a specialist will respond.
 - **The liver, pancreas and osteoid-osteoma applications have no documentation
   on the site.** Row C of the indications and the matching row on the product
   page are written as the wider reach of the platform rather than as documented

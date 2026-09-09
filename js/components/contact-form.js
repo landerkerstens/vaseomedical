@@ -1,11 +1,20 @@
 /* =========================================================
-   <contact-form> — enquiry form with client-side validation
+   <contact-form> — the site's single enquiry form
    ---------------------------------------------------------
-   Renders the form markup and encapsulates its validation.
+   Every kind of enquiry arrives here: evaluating the system,
+   choosing an electrode configuration, asking where an
+   indication stands with the TGA, or booking a case. There is
+   deliberately no second form and no modal anywhere on the
+   site — one form, one inbox.
+
+   The indication picker is optional: it gives a clinical
+   enquiry somewhere precise to land without turning a general
+   question into a form-filling exercise.
+
    There is no backend yet, so a valid submission is handed to
    the visitor's own mail client via mailto: rather than being
    dropped. Swap that call for a fetch() to a real endpoint
-   when one exists.
+   when one exists; the validation around it does not change.
    ========================================================= */
 
 import { Component, define, mailtoLink } from "../lib/component.js";
@@ -13,21 +22,46 @@ import { brand } from "../site-content.js";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/* Kept in step with the indications on the home page and the
+   clinical applications on the product page. "Something else"
+   stays last so the list never turns anyone away. */
+const INDICATIONS = [
+  "Benign thyroid nodules",
+  "Uterine fibroids",
+  "Liver lesions",
+  "Pancreatic lesions",
+  "Osteoid osteoma",
+  "Something else / not yet decided",
+];
+
 class ContactForm extends Component {
   render() {
+    const options = INDICATIONS.map(
+      (indication) => `<option value="${indication}">${indication}</option>`
+    ).join("");
+
     return `
       <form class="contact__form" novalidate>
-        <div class="field">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" autocomplete="name" required />
+        <div class="field__row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+          </div>
         </div>
         <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" required />
+          <label for="org">Hospital or company</label>
+          <input type="text" id="org" name="org" autocomplete="organization" required />
         </div>
         <div class="field">
-          <label for="org">Organisation</label>
-          <input type="text" id="org" name="org" autocomplete="organization" />
+          <label for="indication">Intended indication <span class="field__optional">Optional</span></label>
+          <select id="indication" name="indication">
+            <option value="" selected>Select if relevant</option>
+            ${options}
+          </select>
         </div>
         <div class="field">
           <label for="message">How can we help?</label>
@@ -48,21 +82,28 @@ class ContactForm extends Component {
 
       const name = form.elements.name.value.trim();
       const email = form.elements.email.value.trim();
+      const org = form.elements.org.value.trim();
       const message = form.elements.message.value.trim();
-      const validEmail = EMAIL_PATTERN.test(email);
 
-      if (!name || !validEmail || !message) {
+      if (!name || !email || !org || !message) {
         status.textContent =
-          "Please complete your name, a valid email and a message.";
+          "Please complete your name, email, hospital or company and a message.";
         status.className = "form__status err";
         return;
       }
 
-      const org = form.elements.org.value.trim();
-      window.location.href = mailtoLink(brand.email, `Website enquiry from ${name}`, [
+      if (!EMAIL_PATTERN.test(email)) {
+        status.textContent = "Please enter a valid email address.";
+        status.className = "form__status err";
+        return;
+      }
+
+      const indication = form.elements.indication.value;
+      window.location.href = mailtoLink(brand.email, `Enquiry from ${org}`, [
         ["Name", name],
         ["Email", email],
-        ["Organisation", org || "—"],
+        ["Hospital / company", org],
+        ["Intended indication", indication || "—"],
         ["Message", message],
       ]);
 
